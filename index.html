@@ -11,6 +11,15 @@
     <link rel="icon" href="assets/imgs/favicon.ico" type="image/x-icon" />
     <!-- Bootstrap + Meyawo main styles -->
     <link rel="stylesheet" href="assets/css/meyawo.css">
+
+    <script src="index.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("s5nLbOFjYiQN2q7yh");
+        })();
+    </script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
@@ -60,7 +69,7 @@
             </h1>
             <p class="header-subtitle">React/ React Native Developer</p>
 
-            <!-- <button class="btn btn-primary">Visit My Works</button> -->
+            <a class=" btn btn-primary btn-rounded" href="#contact">Hire me</a>
         </div>
     </header><!-- end of page header -->
 
@@ -267,20 +276,20 @@
             <p class="section-subtitle">How can you communicate?</p>
             <h6 class="section-title mb-5">Contact Me</h6>
             <!-- contact form -->
-            <form action="mailto:sadiqrauf00928@gmail.com" method="GET" class="contact-form col-md-10 col-lg-8 m-auto">
+            <form action="" method="GET" class="contact-form col-md-10 col-lg-8 m-auto">
                 <div class="form-row">
                     <div class="form-group col-sm-6">
-                        <input type="text" size="50" class="form-control" placeholder="Your Name" required>
+                        <input type="text" size="50" class="form-control" id="name" placeholder="Your Name" required>
                     </div>
                     <div class="form-group col-sm-6">
-                        <input type="email" class="form-control" placeholder="Enter Email" requried>
+                        <input type="email" id="email" class="form-control" placeholder="Enter Email" required>
                     </div>
                     <div class="form-group col-sm-12">
-                        <textarea name="comment" id="comment" rows="6" class="form-control"
-                            placeholder="Write Something"></textarea>
+                        <textarea name="comment" id="message" rows="6" class="form-control"
+                            placeholder="Write Something" required></textarea>
                     </div>
                     <div class="form-group col-sm-12 mt-3">
-                        <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">
+                        <button class="btn btn-outline-primary rounded" onclick="sendMail()">Submit</button>
                     </div>
                 </div>
             </form><!-- end of contact form -->
