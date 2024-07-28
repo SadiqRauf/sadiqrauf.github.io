@@ -20,6 +20,15 @@
             emailjs.init("s5nLbOFjYiQN2q7yh");
         })();
     </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            height: 100vh;
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
@@ -74,7 +83,7 @@
     </header><!-- end of page header -->
 
     <!-- about section -->
-    <section class="section pt-0" id="about">
+    <section class="section mb-6 mb-md-0 " id="about">
         <!-- container -->
         <div class="container text-center">
             <!-- about wrapper -->
@@ -83,7 +92,7 @@
                     <img src="assets/imgs/man.png" class="about-img"
                         alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
                 </div>
-                <div class="about-caption">
+                <div class="about-captio ">
                     <p class="section-subtitle">Who Am I ?</p>
                     <h2 class="section-title mb-3">About Me</h2>
                     <p>
@@ -93,7 +102,7 @@
                         Skilled in React Native, Typescript, React, Redux, Firebase, Android Development, iOS
                         development, and Web Development.
                     </p>
-                    <a href="assets/imgs/Software Engr.pdf" class="btn-rounded btn btn-outline-primary mt-4"
+                    <a href="assets/imgs/Software Engr.pdf" class="btn-rounded btn btn-outline-primary mt-4 "
                         download>Download CV</a>
                 </div>
             </div><!-- end of about wrapper -->
@@ -103,7 +112,7 @@
     <!-- service section -->
     <section class="section" id="skill">
         <div class="container text-center ">
-            <h1 class="display-5 mb-5">Skills & Experience</h1>
+            <h1 class="display-5 mb-5 mt-3">Skills & Experience</h1>
             <p class="mb-4">With a wealth of experience and a deep understanding of my field, I bring a proven track
                 record of delivering high-quality work. My expertise spans various aspects, enabling me to handle
                 complex projects with ease and efficiency. I am dedicated to achieving excellence in every task,
@@ -114,71 +123,45 @@
                         <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                             <h3 class="mb-4">My Skills</h3>
                             <div class="" style="margin-right: 20px;">
-                                <div class="skill mb-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="font-weight-bold">React Native</h6>
-                                        <h6 class="font-weight-bold">95%</h6>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar " role="progressbar" aria-valuenow="95"
-                                            aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 95%; background: #a79cd1;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill mb-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="font-weight-bold">React</h6>
-                                        <h6 class="font-weight-bold">90%</h6>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="85"
-                                            aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 90%; background: #a79cd1;"></div>
-                                    </div>
-                                </div>
-                                <div class="skill mb-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="font-weight-bold">Next Js</h6>
-                                        <h6 class="font-weight-bold">90%</h6>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar " role="progressbar" aria-valuenow="90"
-                                            aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 90%; background: #a79cd1;"></div>
-                                    </div>
-                                </div>
+                                <div
+                                    class="skill mb-4 justify-content-between text-center pb-4 row row-cols-1 row-cols-md-4 g-4">
 
-                                <div class="skill mb-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="font-weight-bold">Javascript</h6>
-                                        <h6 class="font-weight-bold">90%</h6>
+                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 90px; object-fit: cover;">
+                                        <img src="assets/imgs/React.webp" class=" h-auto"
+                                            style="object-fit: cover; width: 100%;" alt="logo">
+                                        <h6 class="font-weight-normal  text-center mt-2">React Native</h6>
                                     </div>
-                                    <div class="progress">
-                                        <div class="progress-bar " role="progressbar" aria-valuenow="90"
-                                            aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 90%; background: #a79cd1;"></div>
+                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 90px; object-fit: cover;">
+                                        <img src="assets/imgs/React.webp" class=" h-auto"
+                                            style="object-fit: cover; width: 100%;" alt="logo">
+                                        <h6 class="font-weight-normal mt-2">React</h6>
                                     </div>
-                                </div>
-                                <div class="skill mb-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="font-weight-bold">CSS</h6>
-                                        <h6 class="font-weight-bold">95%</h6>
+                                    <div class="m-3 mt-4 pt-1 mb-6"
+                                        style="height: 70px; width: 80px; object-fit: cover;">
+                                        <img src="assets/imgs/next.png" class=" h-auto"
+                                            style="object-fit: cover; width: 100%;" alt="logo">
+                                        <h6 class="font-weight-normal mt-2">Next.Js</h6>
                                     </div>
-                                    <div class="progress">
-                                        <div class="progress-bar " role="progressbar" aria-valuenow="95"
-                                            aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 95%; background: #a79cd1;"></div>
+                                    <div class="m-3 mt-4 pt-2" style="height: 70px; width: 80px;  object-fit: cover;">
+                                        <img src="assets/imgs/html.webp" class=" h-auto"
+                                            style="object-fit: cover; width: 100%;" alt="logo">
+                                        <h6 class="font-weight-normal mt-2">HTML</h6>
                                     </div>
-                                </div>
-                                <div class="skill mb-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="font-weight-bold">HTML</h6>
-                                        <h6 class="font-weight-bold">85%</h6>
+
+                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 85px; object-fit: cover;">
+                                        <img src="assets/imgs/css.webp" class=" h-auto"
+                                            style="object-fit: cover; width: 100%;" alt="logo">
+                                        <h6 class="font-weight-normal mt-2">CSS</h6>
                                     </div>
-                                    <div class="progress">
-                                        <div class="progress-bar " role="progressbar" aria-valuenow="85"
-                                            aria-valuemin="0" aria-valuemax="100"
-                                            style="width: 90%; background: #a79cd1;"></div>
+                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 80px; object-fit: cover;">
+                                        <img src="assets/imgs/js.png" class=" h-auto"
+                                            style="object-fit: cover; width: 100%;" alt="logo">
+                                        <h6 class="font-weight-normal mt-2">Javascript</h6>
+                                    </div>
+                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 80px; object-fit: cover;">
+                                        <img src="assets/imgs/ts.webp" class=" h-auto"
+                                            style="object-fit: cover; width: 100%;" alt="logo">
+                                        <h6 class="font-weight-normal mt-2">Typescript</h6>
                                     </div>
                                 </div>
                             </div>
@@ -189,21 +172,39 @@
                                 <div class="row gy-5 gx-4 ">
                                     <div class="col-sm-6 mb-6 mt-4">
                                         <p class="text-primary mb-1 text-sm-left">June 2021 - Oct 2022</p>
-                                        <h5 class="text-primary text-sm-left">Gitrex Technologies</h5>
-                                        <p class="text-primary mb-1 text-sm-left">Job Position </p>
-                                        <h6 class="mb-0 text-primary text-sm-left">React / React Native Developer</h6>
+                                        <a href="https://www.gitrextechnologies.com/">
+                                            <h5 class="text-primary text-sm-left" style="text-decoration: underline;">
+                                                Gitrex Technologies</h5>
+                                        </a>
+                                        <p class="text-primary mb-1 text-sm-left">Job Position (Onsite)</p>
+                                        <h6 class="mb-0 text-primary text-sm-left">React Native Developer</h6>
                                     </div>
 
                                     <div class="col-sm-6  mb-6 mt-4">
                                         <p class="text-primary mb-1 text-sm-left">Oct 2022 - May 2023</p>
-                                        <h5 class="text-primary text-sm-left">Saufik Islamabad</h5>
-                                        <p class="text-primary mb-1 text-sm-left">Job Position </p>
+                                        <a href="https://www.saufik.com/">
+                                            <h5 class="text-primary text-sm-left" style="text-decoration: underline;">
+                                                Saufik</h5>
+                                        </a>
+                                        <p class="text-primary mb-1 text-sm-left">Job Position (Onsite)</p>
                                         <h6 class="mb-0 text-primary text-sm-left">React / React Native Developer</h6>
                                     </div>
-                                    <div class="col-sm-6 ">
+                                    <div class="col-sm-6 mb-6">
                                         <p class="text-primary mb-1 text-sm-left">May 2023 - Current</p>
-                                        <h5 class="text-primary text-sm-left">iPlex Islamabad</h5>
-                                        <p class="text-primary mb-1 text-sm-left">Job Position </p>
+                                        <a href="https://iplex.co/">
+                                            <h5 class="text-primary text-sm-left" style="text-decoration: underline;">
+                                                iPlex</h5>
+                                        </a>
+                                        <p class="text-primary mb-1 text-sm-left">Job Position (Onsite) </p>
+                                        <h6 class="mb-0 text-primary text-sm-left">React / React Native Developer</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="text-primary mb-1 text-sm-left">July 2023 - Current</p>
+                                        <a href="https://kodec.com.au/">
+                                            <h5 class="text-primary text-sm-left" style="text-decoration: underline;">
+                                                Kodec</h5>
+                                        </a>
+                                        <p class="text-primary mb-1 text-sm-left">Job Position (Remote) </p>
                                         <h6 class="mb-0 text-primary text-sm-left">React / React Native Developer</h6>
                                     </div>
                                 </div>
