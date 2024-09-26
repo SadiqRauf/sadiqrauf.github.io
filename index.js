@@ -5,7 +5,7 @@ function sendMail() {
     message: document.getElementById("message").value,
   };
 
-  const serviceID = "service_0lwppn4";
+  const serviceID = "service_1fqav2m";
   const templateID = "template_ji6pfoj";
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (
