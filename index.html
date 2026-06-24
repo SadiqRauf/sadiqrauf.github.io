@@ -1,343 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Devcrud">
-    <title>Sadiq Rauf's Portfolio</title>
-    <!-- font icons -->
-    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
-    <link rel="icon" href="assets/imgs/favicon.ico" type="image/x-icon" />
-    <!-- Bootstrap + Meyawo main styles -->
-    <link rel="stylesheet" href="assets/css/meyawo.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Muhammad Sadiq Rauf - Software Engineer specializing in React Native, React.js, and Next.js">
+  <meta name="author" content="Muhammad Sadiq Rauf">
+  <title>Sadiq Rauf | Software Engineer</title>
+  <link rel="icon" href="assets/imgs/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () { emailjs.init("s5nLbOFjYiQN2q7yh"); })();
+  </script>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --card: #1c2230;
+      --border: #30363d;
+      --primary: #58a6ff;
+      --primary-dark: #388bfd;
+      --accent: #7c3aed;
+      --green: #3fb950;
+      --text: #f0f6fc;
+      --muted: #8b949e;
+      --subtle: #c9d1d9;
+      --gradient: linear-gradient(135deg, #58a6ff 0%, #7c3aed 100%);
+      --shadow: 0 8px 32px rgba(0,0,0,0.4);
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-    <script src="index.js"></script>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function () {
-            emailjs.init("s5nLbOFjYiQN2q7yh");
-        })();
-    </script>
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
+    html { scroll-behavior: smooth; }
 
-        section {
-            height: auto;
-        }
-    </style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--surface); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+    /* ── Utilities ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-tag { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 12px; display: block; }
+    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--text); line-height: 1.2; }
+    .section-desc { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin-top: 16px; line-height: 1.7; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; border: none; cursor: pointer; transition: var(--transition); }
+    .btn-primary { background: var(--gradient); color: #fff; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(88,166,255,0.3); opacity: 0.9; }
+    .btn-outline { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+    .gradient-text { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* ── Animations ── */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 20px 0;
+      transition: var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(13, 17, 23, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+    nav .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--primary); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: var(--transition); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: var(--transition); }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { padding: 8px 20px; font-size: 0.875rem; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: var(--transition); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; flex-direction: column; gap: 20px; padding: 24px 0; border-top: 1px solid var(--border); margin-top: 12px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--muted); text-decoration: none; font-size: 1rem; font-weight: 500; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh; position: relative; overflow: hidden;
+      background: var(--bg); display: flex; align-items: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(88,166,255,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 60% 80%, rgba(63,185,80,0.05) 0%, transparent 50%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(rgba(48,54,61,0.3) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(48,54,61,0.3) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+    }
+    .hero-wrapper {
+      position: relative; z-index: 1; width: 100%;
+      display: grid; grid-template-columns: 1fr 440px;
+      gap: 48px; align-items: center;
+      padding: 120px 0 80px;
+    }
+    .hero-content { min-width: 0; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.3); border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: var(--primary); margin-bottom: 28px; animation: fadeInUp 0.6s ease forwards; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 700; line-height: 1.15; color: var(--text); margin-bottom: 16px; animation: fadeInUp 0.6s ease 0.1s both; }
+    .hero-subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--muted); margin-bottom: 28px; min-height: 36px; animation: fadeInUp 0.6s ease 0.2s both; }
+    .typing-cursor { display: inline-block; width: 2px; height: 1em; background: var(--primary); margin-left: 3px; vertical-align: middle; animation: blink 1s infinite; }
+    .hero-desc { color: var(--subtle); font-size: 1rem; line-height: 1.8; margin-bottom: 36px; animation: fadeInUp 0.6s ease 0.3s both; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeInUp 0.6s ease 0.4s both; }
+    .hero-stats { display: flex; gap: 32px; margin-top: 48px; padding-top: 36px; border-top: 1px solid var(--border); animation: fadeInUp 0.6s ease 0.5s both; flex-wrap: wrap; }
+    .hero-stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--text); }
+    .hero-stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+    .hero-visual {
+      width: 440px; height: 440px;
+      display: flex; align-items: center; justify-content: center;
+      animation: float 6s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .hero-orbit { position: absolute; border-radius: 50%; border: 1px dashed rgba(88,166,255,0.2); }
+    .orbit-1 { width: 300px; height: 300px; animation: spin 20s linear infinite; }
+    .orbit-2 { width: 420px; height: 420px; animation: spin 30s linear infinite reverse; }
+    .orbit-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; top: -4px; left: 50%; margin-left: -4px; }
+    .orbit-1 .orbit-dot { background: var(--primary); }
+    .orbit-2 .orbit-dot { background: var(--accent); }
+    .hero-avatar { width: 190px; height: 190px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 3.8rem; font-weight: 700; color: #fff; position: relative; z-index: 1; border: 3px solid rgba(88,166,255,0.3); font-family: 'Space Grotesk', sans-serif; }
+
+    /* ── About ── */
+    #about { background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-img-wrap { position: relative; }
+    .about-img-box { border-radius: var(--radius); overflow: hidden; position: relative; }
+    .about-img-box img { width: 100%; height: 400px; object-fit: cover; border-radius: var(--radius); }
+    .about-img-box::after { content: ''; position: absolute; inset: 0; background: var(--gradient); opacity: 0.15; border-radius: var(--radius); }
+    .about-badge { position: absolute; bottom: -20px; right: -20px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 24px; text-align: center; }
+    .about-badge-num { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: var(--primary); display: block; }
+    .about-badge-text { font-size: 0.8rem; color: var(--muted); }
+    .about-content .section-desc { max-width: none; }
+    .about-items { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .about-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--subtle); }
+    .about-item i { color: var(--primary); font-size: 1rem; }
+
+    /* ── Skills ── */
+    #skills { background: var(--bg); }
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 56px; }
+    .skill-category { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; transition: var(--transition); }
+    .skill-category:hover { border-color: rgba(88,166,255,0.4); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .skill-cat-title { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .skill-cat-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(88,166,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: var(--primary); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag { padding: 6px 14px; background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.2); border-radius: 100px; font-size: 0.8rem; color: var(--subtle); transition: var(--transition); cursor: default; }
+    .skill-tag:hover { background: rgba(88,166,255,0.18); color: var(--text); border-color: var(--primary); }
+
+    /* ── Experience ── */
+    #experience { background: var(--surface); }
+    .exp-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 56px; }
+    .exp-col-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 32px; display: flex; align-items: center; gap: 10px; }
+    .exp-col-title::before { content: ''; width: 20px; height: 2px; background: var(--primary); border-radius: 2px; }
+    .timeline { position: relative; }
+    .timeline::before { content: ''; position: absolute; left: 12px; top: 8px; bottom: 0; width: 1px; background: var(--border); }
+    .timeline-item { position: relative; padding-left: 40px; padding-bottom: 32px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot { position: absolute; left: 0; top: 6px; width: 25px; height: 25px; border-radius: 50%; background: var(--bg); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; z-index: 1; }
+    .timeline-dot::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+    .timeline-dot.current { background: rgba(88,166,255,0.1); }
+    .timeline-dot.current::after { background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
+    .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; transition: var(--transition); }
+    .exp-card:hover { border-color: rgba(88,166,255,0.3); }
+    .exp-date { font-size: 0.75rem; color: var(--primary); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .exp-company { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .exp-role { font-size: 0.85rem; color: var(--muted); margin-bottom: 6px; }
+    .exp-location { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+    .exp-badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 0.7rem; font-weight: 600; margin-top: 8px; }
+    .badge-current { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+    .badge-onsite { background: rgba(88,166,255,0.1); color: var(--primary); border: 1px solid rgba(88,166,255,0.2); }
+    .badge-remote { background: rgba(124,58,237,0.1); color: #a78bfa; border: 1px solid rgba(124,58,237,0.3); }
+    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .edu-degree { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .edu-school { font-size: 0.9rem; color: var(--primary); margin-top: 4px; }
+    .edu-year { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+
+    /* ── Projects ── */
+    #projects { background: var(--bg); }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
+    .project-card:hover { border-color: rgba(88,166,255,0.4); transform: translateY(-6px); box-shadow: var(--shadow); }
+    .project-header { padding: 24px 24px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+    .project-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: #fff; flex-shrink: 0; }
+    .project-links { display: flex; gap: 12px; }
+    .project-links a { color: var(--muted); font-size: 0.95rem; transition: var(--transition); text-decoration: none; }
+    .project-links a:hover { color: var(--primary); }
+    .project-body { padding: 20px 24px; flex: 1; }
+    .project-name { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .project-footer { padding: 16px 24px 24px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech-tag { padding: 3px 10px; background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.15); border-radius: 100px; font-size: 0.72rem; color: var(--primary); font-weight: 500; }
+
+    /* ── Contact ── */
+    #contact { background: var(--surface); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; margin-top: 56px; align-items: start; }
+    .contact-info h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 16px; }
+    .contact-info p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 32px; }
+    .contact-detail { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .contact-detail-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(88,166,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--primary); flex-shrink: 0; }
+    .contact-detail-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 2px; }
+    .contact-detail-val { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+    .contact-social { display: flex; gap: 12px; margin-top: 32px; }
+    .social-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; transition: var(--transition); font-size: 1rem; }
+    .social-icon:hover { background: rgba(88,166,255,0.1); border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--muted); letter-spacing: 0.5px; }
+    .form-control { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: var(--transition); outline: none; width: 100%; }
+    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(88,166,255,0.1); }
+    .form-control::placeholder { color: var(--muted); }
+    textarea.form-control { resize: vertical; min-height: 140px; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .submit-btn { padding: 14px; font-size: 0.95rem; border-radius: 8px; }
+    #toast { position: fixed; bottom: 24px; right: 24px; background: var(--green); color: #fff; padding: 14px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; z-index: 9999; transform: translateY(80px); opacity: 0; transition: var(--transition); }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── Footer ── */
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 40px 0; text-align: center; }
+    .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .footer-logo span { color: var(--primary); }
+    .footer-text { font-size: 0.85rem; color: var(--muted); margin-top: 16px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .hero-wrapper { grid-template-columns: 1fr; padding: 110px 0 70px; gap: 0; }
+      .hero-visual { display: none; }
+      .about-grid, .exp-layout, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-badge { right: 0; }
+    }
+    @media (max-width: 640px) {
+      .section { padding: 70px 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 20px; }
+      .hero-btns .btn { padding: 10px 20px; font-size: 0.85rem; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .about-items { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+<body>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-
-    <!-- Page Navbar -->
-    <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
-        <div class="container">
-            <a class="logo" href="#">M. Sadiq Rauf</a>
-            <ul class="nav">
-                <li class="item">
-                    <a class="link" href="#home">Home</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#about">About</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#skill">Skills & Experience</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#portfolio">Portfolio</a>
-                </li>
-
-                <!-- <li class="item">
-                    <a class="link" href="#contact">Contact</a>
-                </li> -->
-                <li class="item ml-md-3">
-                    <!-- <a href="components.html" class="btn btn-primary">Components</a> -->
-                    <a class="btn btn-primary" href="#contact">Contact</a>
-                </li>
-            </ul>
-            <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
-                <div class="hamburger-box">
-                    <div class="hamburger-inner"></div>
-                </div>
-            </a>
-        </div>
-    </nav><!-- End of Page Navbar -->
-
-    <!-- page header -->
-    <header id="home" class="header">
-        <div class="overlay"></div>
-        <div class="header-content container">
-            <h1 class="header-title">
-                <span class="up">HI!</span>
-                <span class="down">I am</span>
-                <span class="down">Muhammad Sadiq Rauf</span>
-            </h1>
-            <p class="header-subtitle">React/ React Native Developer</p>
-
-            <a class=" btn btn-primary btn-rounded" href="https://github.com/SadiqRauf">Github</a>
-        </div>
-    </header><!-- end of page header -->
-
-    <!-- about section -->
-    <section class="section mb-6 mb-md-0 " id="about">
-        <!-- container -->
-        <div class="container text-center">
-            <!-- about wrapper -->
-            <div class="about">
-                <div class="about-img-holder">
-                    <img src="assets/imgs/man.png" class="about-img"
-                        alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                </div>
-                <div class="about-captio ">
-                    <p class="section-subtitle">Who Am I ?</p>
-                    <h2 class="section-title mb-3">About Me</h2>
-                    <p>
-                        A Passionate Software engineer in software development, Architecture, and deployment. Consistent
-                        and good team worker, having strong systematic, problem solving, and communication skills. I
-                        love to learn new technologies and solve challenging tasks.
-                        Skilled in React Native, Typescript, React, Redux, Firebase, Android Development, iOS
-                        development, and Web Development.
-                    </p>
-                    <a href="assets/imgs/Software Engr.pdf" class="btn-rounded btn btn-outline-primary mt-4 "
-                        download>Download CV</a>
-                </div>
-            </div><!-- end of about wrapper -->
-        </div><!-- end of container -->
-    </section> <!-- end of about section -->
-
-    <!-- service section -->
-    <section class="section" id="skill">
-        <div class="container text-center ">
-            <h1 class="display-5 mb-5 mt-3">Skills & Experience</h1>
-            <p class="mb-4">With a wealth of experience and a deep understanding of my field, I bring a proven track
-                record of delivering high-quality work. My expertise spans various aspects, enabling me to handle
-                complex projects with ease and efficiency. I am dedicated to achieving excellence in every task,
-                ensuring that my contributions consistently meet and exceed expectations.</p>
-            <div class="container-xxl py-6 pb-5">
-                <div class="container">
-                    <div class="row g-5">
-                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                            <h3 class="mb-4">My Skills</h3>
-                            <div class="" style="margin-right: 20px;">
-                                <div
-                                    class="skill mb-4 justify-content-between text-center pb-4 row row-cols-1 row-cols-md-4 g-4">
-
-                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 90px; object-fit: cover;">
-                                        <img src="assets/imgs/React.webp" class=" h-auto"
-                                            style="object-fit: cover; width: 100%;" alt="logo">
-                                        <h6 class="font-weight-normal  text-center mt-2">React Native</h6>
-                                    </div>
-                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 90px; object-fit: cover;">
-                                        <img src="assets/imgs/React.webp" class=" h-auto"
-                                            style="object-fit: cover; width: 100%;" alt="logo">
-                                        <h6 class="font-weight-normal mt-2">React</h6>
-                                    </div>
-                                    <div class="m-3 mt-4 pt-1 mb-6"
-                                        style="height: 70px; width: 80px; object-fit: cover;">
-                                        <img src="assets/imgs/next.png" class=" h-auto"
-                                            style="object-fit: cover; width: 100%;" alt="logo">
-                                        <h6 class="font-weight-normal mt-2">Next.Js</h6>
-                                    </div>
-                                    <div class="m-3 mt-4 pt-2" style="height: 70px; width: 80px;  object-fit: cover;">
-                                        <img src="assets/imgs/html.webp" class=" h-auto"
-                                            style="object-fit: cover; width: 100%;" alt="logo">
-                                        <h6 class="font-weight-normal mt-2">HTML</h6>
-                                    </div>
-
-                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 85px; object-fit: cover;">
-                                        <img src="assets/imgs/css.webp" class=" h-auto"
-                                            style="object-fit: cover; width: 100%;" alt="logo">
-                                        <h6 class="font-weight-normal mt-2">CSS</h6>
-                                    </div>
-                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 80px; object-fit: cover;">
-                                        <img src="assets/imgs/js.png" class=" h-auto"
-                                            style="object-fit: cover; width: 100%;" alt="logo">
-                                        <h6 class="font-weight-normal mt-2">Javascript</h6>
-                                    </div>
-                                    <div class="m-3 mt-4 mb-6" style="height: 70px; width: 80px; object-fit: cover;">
-                                        <img src="assets/imgs/ts.webp" class=" h-auto"
-                                            style="object-fit: cover; width: 100%;" alt="logo">
-                                        <h6 class="font-weight-normal mt-2">Typescript</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 wow fadeInUp  " data-wow-delay="0.5s">
-                            <h3 class="mb-4">Experience</h3>
-                            <div class="tab-content ">
-                                <div class="row gy-5 gx-4 ">
-                                    <div class="col-sm-6 mb-6 mt-4">
-                                        <p class="text-primary mb-1 text-sm-left">June 2021 - Oct 2022</p>
-                                        <a href="https://www.gitrextechnologies.com/">
-                                            <h5 class="text-primary text-sm-left" style="text-decoration: underline;">
-                                                Gitrex Technologies</h5>
-                                        </a>
-                                        <p class="text-primary mb-1 text-sm-left">Job Position (Onsite)</p>
-                                        <h6 class="mb-0 text-primary text-sm-left">React Native Developer</h6>
-                                    </div>
-
-                                    <div class="col-sm-6  mb-6 mt-4">
-                                        <p class="text-primary mb-1 text-sm-left">Oct 2022 - May 2023</p>
-                                        <a href="https://www.saufik.com/">
-                                            <h5 class="text-primary text-sm-left" style="text-decoration: underline;">
-                                                Saufik</h5>
-                                        </a>
-                                        <p class="text-primary mb-1 text-sm-left">Job Position (Onsite)</p>
-                                        <h6 class="mb-0 text-primary text-sm-left">React / React Native Developer</h6>
-                                    </div>
-                                    <div class="col-sm-6 mb-6">
-                                        <p class="text-primary mb-1 text-sm-left">May 2023 - Current</p>
-                                        <a href="https://iplex.co/">
-                                            <h5 class="text-primary text-sm-left" style="text-decoration: underline;">
-                                                iPlex</h5>
-                                        </a>
-                                        <p class="text-primary mb-1 text-sm-left">Job Position (Onsite) </p>
-                                        <h6 class="mb-0 text-primary text-sm-left">React / React Native Developer</h6>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="text-primary mb-1 text-sm-left">July 2023 - Current</p>
-                                        <a href="https://kodec.com.au/">
-                                            <h5 class="text-primary text-sm-left" style="text-decoration: underline;">
-                                                Kodec</h5>
-                                        </a>
-                                        <p class="text-primary mb-1 text-sm-left">Job Position (Remote) </p>
-                                        <h6 class="mb-0 text-primary text-sm-left">React / React Native Developer</h6>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="portfolio">
-        <div class="container text-center">
-            <p class="section-subtitle">What I Did ?</p>
-            <h6 class="section-title mb-6">Portfolio</h6>
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="portfolio-card">
-                        <img src="assets/imgs/folio-1.jpg" class="portfolio-card-img rounded"
-                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        <span class="portfolio-card-overlay rounded">
-                            <span class="portfolio-card-caption">
-                                <h4>Wisemarket App</h4>
-                                <span>React Native</span>
-                                <div class="social-links text-center m-auto ml-sm-auto mb-3">
-                                    <a href="https://play.google.com/store/apps/details?id=com.wise.wisemarket&pcampaignid=web_share"
-                                        class="link"><i class="ti-android"></i></a>
-                                </div>
-                                <div class="social-links text-center m-auto ml-sm-auto ">
-                                    <a href="https://apps.apple.com/pk/app/wisemarket/id6474654022" class="link"><i
-                                            class="ti-apple"></i></a>
-                                </div>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <a href="https://kodec.com.au/" class="portfolio-card">
-                        <img class="portfolio-card-img rounded" src="assets/imgs/folio-2.jpg"
-                            class="img-responsive rounded"
-                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        <span class="portfolio-card-overlay rounded">
-                            <span class="portfolio-card-caption">
-                                <h4>Kodec</h5>
-                                    <span>Next Js</span>
-                                    <p class="font-weight-normal">Website</p>
-                            </span>
-                        </span>
-                    </a>
-                </div>
-
-
-                <div class="col-md-4">
-                    <div class="portfolio-card">
-                        <img src="assets/imgs/folio-3.jpg" class="portfolio-card-img rounded"
-                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        <span class="portfolio-card-overlay rounded">
-                            <span class="portfolio-card-caption">
-                                <h4>Frayt App</h4>
-
-                                <span>React Native</span>
-                                <div class="social-links text-center m-auto ml-sm-auto mb-3">
-                                    <a href="https://play.google.com/store/apps/dev?id=6347830546226419522&hl=en_US&pli=1"
-                                        class="link"><i class="ti-android"></i></a>
-                                </div>
-                                <div class="social-links text-center m-auto ml-sm-auto ">
-                                    <a href="https://apps.apple.com/us/app/frayt-driver/id6450462430" class="link"><i
-                                            class="ti-apple"></i>
-                                    </a>
-                                </div>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div><!-- end of row -->
-            <a href="" class="section-subtitle">See More...</a>
-        </div><!-- end of container -->
-    </section>
-
-
-    <!-- contact section -->
-    <section class="section" id="contact">
-        <div class="container text-center">
-            <p class="section-subtitle">How can you communicate?</p>
-            <h6 class="section-title mb-5">Contact Me</h6>
-            <!-- contact form -->
-            <form action="" method="GET" class="contact-form col-md-10 col-lg-8 m-auto">
-                <div class="form-row">
-                    <div class="form-group col-sm-6">
-                        <input type="text" size="50" class="form-control" id="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <input type="email" id="email" class="form-control" placeholder="Enter Email" required>
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <textarea name="comment" id="message" rows="6" class="form-control"
-                            placeholder="Write Something" required></textarea>
-                    </div>
-                    <div class="form-group col-sm-12 mt-3">
-                        <button class="btn btn-outline-primary rounded" onclick="sendMail()">Submit</button>
-                    </div>
-                </div>
-            </form><!-- end of contact form -->
-        </div><!-- end of container -->
-    </section><!-- end of contact section -->
-
-    <!-- footer -->
+  <!-- ── Navigation ── -->
+  <nav id="navbar">
     <div class="container">
-        <footer class="footer">
-
-            <div class="social-links text-center m-auto ml-sm-auto">
-
-                <a href="https://www.linkedin.com/in/muhammad-sadiq-rauf/" class="link"><i class="ti-linkedin"></i></a>
-                <a href="https://stackoverflow.com/users/19596124/sadiq-rauf" class="link"><i
-                        class="ti-stack-overflow"></i></a>
-                <a href="https://github.com/SadiqRauf" class="link"><i class="ti-github"></i></a>
-            </div>
-        </footer>
+      <div class="nav-inner">
+        <a class="nav-logo" href="#hero">Sadiq<span>.</span></a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary nav-cta" style="display:none;" id="nav-btn">Hire Me</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#skills" class="mobile-link">Skills</a>
+        <a href="#experience" class="mobile-link">Experience</a>
+        <a href="#projects" class="mobile-link">Projects</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+      </div>
     </div>
-    <!-- end of page footer -->
+  </nav>
 
-    <!-- core  -->
-    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
-    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-wrapper">
+        <!-- Left: text content -->
+        <div class="hero-content">
+          <div class="hero-badge">Available for new opportunities</div>
+          <h1 class="hero-title">Muhammad<br><span class="gradient-text">Sadiq Rauf</span></h1>
+          <p class="hero-subtitle">
+            <span id="typed-text"></span><span class="typing-cursor"></span>
+          </p>
+          <p class="hero-desc">
+            Software Engineer with 5+ years of experience designing, developing, and deploying scalable mobile and web applications. Specialized in React Native, React.js, Next.js, and TypeScript.
+          </p>
+          <div class="hero-btns">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="assets/imgs/Software Engr.pdf" class="btn btn-outline" download>Download CV</a>
+            <a href="https://github.com/SadiqRauf" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="hero-stat-num gradient-text">5+</div>
+              <div class="hero-stat-label">Years Experience</div>
+            </div>
+            <div>
+              <div class="hero-stat-num gradient-text">10+</div>
+              <div class="hero-stat-label">Projects Shipped</div>
+            </div>
+            <div>
+              <div class="hero-stat-num gradient-text">4</div>
+              <div class="hero-stat-label">Companies</div>
+            </div>
+            <div>
+              <div class="hero-stat-num gradient-text">2</div>
+              <div class="hero-stat-label">Platforms</div>
+            </div>
+          </div>
+        </div>
+        <!-- Right: orbital visual -->
+        <div class="hero-visual">
+          <div class="hero-orbit orbit-1"><div class="orbit-dot"></div></div>
+          <div class="hero-orbit orbit-2"><div class="orbit-dot"></div></div>
+          <div class="hero-avatar">SR</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- bootstrap 3 affix -->
-    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+  <!-- ── About ── -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="reveal-left">
+          <div class="about-img-wrap">
+            <div class="about-img-box">
+              <img src="assets/imgs/man.png" alt="Muhammad Sadiq Rauf" style="object-fit:contain;background:var(--card);">
+            </div>
+            <div class="about-badge">
+              <span class="about-badge-num">5+</span>
+              <span class="about-badge-text">Years of Experience</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-content reveal-right">
+          <span class="section-tag">About Me</span>
+          <h2 class="section-title">Crafting Digital Experiences with Code</h2>
+          <p class="section-desc">
+            Passionate Software Engineer specializing in cross-platform mobile and modern web development. I build production-ready applications with clean architecture, great performance, and exceptional user experience. I love tackling complex technical challenges and turning ideas into impactful products.
+          </p>
+          <p class="section-desc" style="margin-top:16px;">
+            Currently at <strong style="color:var(--primary)">Baraqi</strong> (Canada), delivering commerce and government-tech solutions with React Native, React.js, and FastAPI.
+          </p>
+          <div class="about-items">
+            <div class="about-item"><i class="ti-location-pin"></i> Islamabad, Pakistan</div>
+            <div class="about-item"><i class="ti-briefcase"></i> Open to Remote Work</div>
+            <div class="about-item"><i class="ti-mobile"></i> iOS &amp; Android Apps</div>
+            <div class="about-item"><i class="ti-world"></i> Web Applications</div>
+            <div class="about-item"><i class="ti-email"></i> sadiqrauf00928@gmail.com</div>
+            <div class="about-item"><i class="ti-star"></i> English &amp; Urdu</div>
+          </div>
+          <div style="margin-top:32px; display:flex; gap:16px; flex-wrap:wrap;">
+            <a href="#contact" class="btn btn-primary">Get In Touch</a>
+            <a href="https://linkedin.com/in/engr-sadiq-rauf" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Meyawo js -->
-    <script src="assets/js/meyawo.js"></script>
+  <!-- ── Skills ── -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+        <span class="section-tag">What I Know</span>
+        <h2 class="section-title">Skills &amp; Technologies</h2>
+        <p class="section-desc" style="margin:16px auto 0;">A comprehensive toolkit for building complete, production-ready applications across mobile and web platforms.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category reveal" style="transition-delay:0.1s">
+          <div class="skill-cat-title">
+            <div class="skill-cat-icon"><i class="ti-mobile"></i></div>
+            Mobile Development
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">React Native</span>
+            <span class="skill-tag">Expo</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Push Notifications</span>
+            <span class="skill-tag">Deep Linking</span>
+            <span class="skill-tag">Android Development</span>
+            <span class="skill-tag">iOS Development</span>
+            <span class="skill-tag">Google Play Store</span>
+            <span class="skill-tag">App Store</span>
+          </div>
+        </div>
+        <div class="skill-category reveal" style="transition-delay:0.2s">
+          <div class="skill-cat-title">
+            <div class="skill-cat-icon"><i class="ti-layout"></i></div>
+            Frontend Development
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">React.js</span>
+            <span class="skill-tag">Next.js</span>
+            <span class="skill-tag">Astro</span>
+            <span class="skill-tag">Redux Toolkit</span>
+            <span class="skill-tag">RTK Query</span>
+            <span class="skill-tag">Material UI</span>
+            <span class="skill-tag">Tailwind CSS</span>
+            <span class="skill-tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-category reveal" style="transition-delay:0.3s">
+          <div class="skill-cat-title">
+            <div class="skill-cat-icon"><i class="ti-server"></i></div>
+            Backend &amp; Databases
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">SQLite</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Supabase</span>
+            <span class="skill-tag">Keycloak</span>
+          </div>
+        </div>
+        <div class="skill-category reveal" style="transition-delay:0.4s">
+          <div class="skill-cat-title">
+            <div class="skill-cat-icon"><i class="ti-settings"></i></div>
+            Tools &amp; Integrations
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">Git &amp; GitHub</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Stripe</span>
+            <span class="skill-tag">PayPal</span>
+            <span class="skill-tag">Afterpay</span>
+            <span class="skill-tag">Jazzcash</span>
+            <span class="skill-tag">Axios</span>
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">Xcode</span>
+            <span class="skill-tag">Android Studio</span>
+            <span class="skill-tag">Postman</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ── Experience ── -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+        <span class="section-tag">My Journey</span>
+        <h2 class="section-title">Experience &amp; Education</h2>
+        <p class="section-desc" style="margin:16px auto 0;">A track record of delivering impactful products across multiple domains and companies.</p>
+      </div>
+      <div class="exp-layout">
+        <!-- Work Experience -->
+        <div class="reveal-left">
+          <div class="exp-col-title">Work Experience</div>
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-dot current"></div>
+              <div class="exp-card">
+                <div class="exp-date">May 2025 &mdash; Present</div>
+                <div class="exp-company">Baraqi</div>
+                <div class="exp-role">Software Engineer</div>
+                <div class="exp-location"><i class="ti-location-pin" style="font-size:0.7rem;"></i> Canada (Remote)</div>
+                <span class="exp-badge badge-current">Current</span>
+                <span class="exp-badge badge-remote">Remote</span>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="exp-card">
+                <div class="exp-date">July 2023 &mdash; May 2025</div>
+                <div class="exp-company">iPlex</div>
+                <div class="exp-role">Senior Frontend Engineer</div>
+                <div class="exp-location"><i class="ti-location-pin" style="font-size:0.7rem;"></i> Islamabad, Pakistan</div>
+                <span class="exp-badge badge-onsite">Onsite</span>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="exp-card">
+                <div class="exp-date">October 2022 &mdash; May 2023</div>
+                <div class="exp-company">Saufik</div>
+                <div class="exp-role">Junior Frontend Developer</div>
+                <div class="exp-location"><i class="ti-location-pin" style="font-size:0.7rem;"></i> Islamabad, Pakistan</div>
+                <span class="exp-badge badge-onsite">Onsite</span>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="exp-card">
+                <div class="exp-date">June 2021 &mdash; October 2022</div>
+                <div class="exp-company">Gitrex Technologies</div>
+                <div class="exp-role">Internship -> React Native Developer</div>
+                <div class="exp-location"><i class="ti-location-pin" style="font-size:0.7rem;"></i> Islamabad, Pakistan</div>
+                <span class="exp-badge badge-onsite">Onsite</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="reveal-right">
+          <div class="exp-col-title">Education</div>
+          <div class="edu-card">
+            <div style="display:flex; align-items:center; gap:14px; margin-bottom:16px;">
+              <div style="width:44px;height:44px;border-radius:10px;background:rgba(88,166,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0;font-size:1.1rem;">
+                <i class="ti-crown"></i>
+              </div>
+              <div>
+                <div class="edu-degree">Bachelor of Software Engineering</div>
+                <div class="edu-school">University of Science &amp; Technology, Bannu</div>
+                <div class="edu-year">2016 &mdash; 2020</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:32px;">
+            <div class="exp-col-title" style="margin-bottom:20px;">What I Build</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);">
+                <i class="ti-mobile" style="color:var(--primary);font-size:1.1rem;"></i>
+                <div>
+                  <div style="font-size:0.85rem;font-weight:600;color:var(--text);">Cross-Platform Mobile Apps</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">iOS &amp; Android via React Native</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);">
+                <i class="ti-layout" style="color:var(--primary);font-size:1.1rem;"></i>
+                <div>
+                  <div style="font-size:0.85rem;font-weight:600;color:var(--text);">Scalable Web Applications</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">React.js, Next.js, Astro</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);">
+                <i class="ti-server" style="color:var(--primary);font-size:1.1rem;"></i>
+                <div>
+                  <div style="font-size:0.85rem;font-weight:600;color:var(--text);">RESTful APIs &amp; Backend Services</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">FastAPI, Node.js, Python</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);">
+                <i class="ti-credit-card" style="color:var(--primary);font-size:1.1rem;"></i>
+                <div>
+                  <div style="font-size:0.85rem;font-weight:600;color:var(--text);">Payment Gateway Integration</div>
+                  <div style="font-size:0.75rem;color:var(--muted);">Stripe, PayPal, Afterpay, Jazzcash</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects ── -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+        <span class="section-tag">What I've Built</span>
+        <h2 class="section-title">Recent Projects</h2>
+        <p class="section-desc" style="margin:16px auto 0;">Production-ready applications shipped to real users across mobile and web platforms.</p>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card reveal" style="transition-delay:0.1s">
+          <div class="project-header">
+            <div class="project-icon">&#x2699;</div>
+            <div class="project-links">
+              <a href="#" title="Commerce Platform"><i class="ti-link"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-name">rareOS Platform</div>
+            <div class="project-desc">Modern commerce management platform for merchants with inventory management, point-of-sale operations, marketplace distribution, and business analytics.</div>
+          </div>
+          <div class="project-footer">
+            <span class="tech-tag">ReactJS</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Material UI</span>
+            <span class="tech-tag">RTK Query</span>
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">Keycloak</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay:0.15s">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#3fb950,#06b6d4);">&#x1F4F7;</div>
+            <div class="project-links">
+              <a href="#" title="Scanner App"><i class="ti-mobile"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-name">rareOS Scanner App</div>
+            <div class="project-desc">Cross-platform enterprise mobile app with a streamlined 3-step workflow (Snap, Track, Sell) that optimizes inventory processing speed dramatically.</div>
+          </div>
+          <div class="project-footer">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Keycloak</span>
+            <span class="tech-tag">Supabase</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay:0.2s">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);">&#x1F9E0;</div>
+            <div class="project-links">
+              <a href="https://play.google.com/store" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
+              <a href="https://apps.apple.com" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-name">Engage App</div>
+            <div class="project-desc">AI-powered legislative research platform enabling organizations to monitor policy activities, conduct research, and run real-time conversational policy queries.</div>
+          </div>
+          <div class="project-footer">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">AI Integration</span>
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">Keycloak</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay:0.25s">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#06b6d4,#58a6ff);">&#x1F3DB;</div>
+            <div class="project-links">
+              <a href="https://play.google.com/store" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
+              <a href="https://apps.apple.com" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-name">Connect App</div>
+            <div class="project-desc">Mobile app enabling users to discover and connect with elected officials, legislative staff, committees, and government offices across multiple U.S. states.</div>
+          </div>
+          <div class="project-footer">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Keycloak</span>
+            <span class="tech-tag">REST APIs</span>
+            <span class="tech-tag">iOS &amp; Android</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay:0.3s">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">&#x1F6D2;</div>
+            <div class="project-links">
+              <a href="https://play.google.com/store/apps/details?id=com.wise.wisemarket" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
+              <a href="https://apps.apple.com/pk/app/wisemarket/id6474654022" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-name">Wisemarket App</div>
+            <div class="project-desc">Full-featured online marketplace app for tech products and accessories with secure payment gateways, Redux state management, and a polished UX on both platforms.</div>
+          </div>
+          <div class="project-footer">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Redux</span>
+            <span class="tech-tag">Stripe</span>
+            <span class="tech-tag">Play Store</span>
+            <span class="tech-tag">App Store</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay:0.35s">
+          <div class="project-header">
+            <div class="project-icon" style="background:linear-gradient(135deg,#10b981,#059669);">&#x1F310;</div>
+            <div class="project-links">
+              <a href="#" title="Website"><i class="ti-link"></i></a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-name">rareOS Website</div>
+            <div class="project-desc">Modern, responsive marketing website for the rareOS commerce platform built with React.js, TypeScript, and Tailwind CSS delivering fast, scalable user experiences.</div>
+          </div>
+          <div class="project-footer">
+            <span class="tech-tag">ReactJS</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Tailwind CSS</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-desc" style="margin:16px auto 0;">Have a project in mind or just want to say hello? I'd love to hear from you.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal-left">
+          <div class="contact-info">
+            <h3>Let's talk about your project</h3>
+            <p>I'm open to freelance projects, full-time remote roles, and interesting collaborations. Whether you need a mobile app, web application, or just want to discuss ideas, feel free to reach out.</p>
+            <div class="contact-detail">
+              <div class="contact-detail-icon"><i class="ti-email"></i></div>
+              <div>
+                <div class="contact-detail-label">Email</div>
+                <div class="contact-detail-val">sadiqrauf00928@gmail.com</div>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon"><i class="ti-mobile"></i></div>
+              <div>
+                <div class="contact-detail-label">Phone</div>
+                <div class="contact-detail-val">+92 336 572 4621</div>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon"><i class="ti-location-pin"></i></div>
+              <div>
+                <div class="contact-detail-label">Location</div>
+                <div class="contact-detail-val">Islamabad, Pakistan</div>
+              </div>
+            </div>
+            <div class="contact-social">
+              <a href="https://linkedin.com/in/engr-sadiq-rauf" class="social-icon" target="_blank" rel="noopener" title="LinkedIn"><i class="ti-linkedin"></i></a>
+              <a href="https://github.com/SadiqRauf" class="social-icon" target="_blank" rel="noopener" title="GitHub"><i class="ti-github"></i></a>
+              <a href="https://stackoverflow.com/users/19596124/sadiq-rauf" class="social-icon" target="_blank" rel="noopener" title="Stack Overflow"><i class="ti-stack-overflow"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="reveal-right">
+          <form class="contact-form" onsubmit="sendMail(event)">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" id="contact-name" class="form-control" placeholder="John Doe" required>
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="contact-email" class="form-control" placeholder="john@example.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <input type="text" id="contact-subject" class="form-control" placeholder="Project Inquiry">
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea id="contact-message" class="form-control" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary submit-btn">
+              <i class="ti-email"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">Sadiq<span>.</span></div>
+      <div style="margin-top:16px; display:flex; justify-content:center; gap:12px;">
+        <a href="https://linkedin.com/in/engr-sadiq-rauf" class="social-icon" target="_blank" rel="noopener"><i class="ti-linkedin"></i></a>
+        <a href="https://github.com/SadiqRauf" class="social-icon" target="_blank" rel="noopener"><i class="ti-github"></i></a>
+        <a href="https://stackoverflow.com/users/19596124/sadiq-rauf" class="social-icon" target="_blank" rel="noopener"><i class="ti-stack-overflow"></i></a>
+      </div>
+      <p class="footer-text">&copy; 2025 Muhammad Sadiq Rauf. Built with passion.</p>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast">Message sent successfully!</div>
+
+  <script>
+    // Typewriter
+    const roles = [
+      'Software Engineer',
+      'React Native Developer',
+      'React.js Developer',
+      'Next.js Developer',
+      'Mobile App Developer',
+      'Full Stack Engineer',
+    ];
+    let roleIdx = 0, charIdx = 0, deleting = false;
+    const typedEl = document.getElementById('typed-text');
+    function type() {
+      const current = roles[roleIdx];
+      if (!deleting) {
+        typedEl.textContent = current.slice(0, ++charIdx);
+        if (charIdx === current.length) { deleting = true; setTimeout(type, 1800); return; }
+      } else {
+        typedEl.textContent = current.slice(0, --charIdx);
+        if (charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
+      }
+      setTimeout(type, deleting ? 50 : 90);
+    }
+    type();
+
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    const navBtn = document.getElementById('nav-btn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+        navBtn.style.display = 'inline-flex';
+      } else {
+        navbar.classList.remove('scrolled');
+        navBtn.style.display = 'none';
+      }
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.style.transitionDelay || '0s';
+          entry.target.style.transitionDelay = delay;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Contact form
+    function sendMail(e) {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const subject = document.getElementById('contact-subject').value || 'Portfolio Contact';
+      const message = document.getElementById('contact-message').value;
+      emailjs.send('service_9p9xi8t', 'template_xrk1hkh', {
+        from_name: name, from_email: email, subject: subject, message: message
+      }).then(() => {
+        showToast('Message sent successfully!');
+        e.target.reset();
+      }).catch(() => {
+        showToast('Oops! Something went wrong. Please try again.');
+      });
+    }
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // Active nav link highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+      });
+    });
+  </script>
 </body>
-
 </html>
