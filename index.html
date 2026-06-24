@@ -254,8 +254,19 @@
     textarea.form-control { resize: vertical; min-height: 140px; }
     .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .submit-btn { padding: 14px; font-size: 0.95rem; border-radius: 8px; }
-    #toast { position: fixed; bottom: 24px; right: 24px; background: var(--green); color: #fff; padding: 14px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; z-index: 9999; transform: translateY(80px); opacity: 0; transition: var(--transition); }
-    #toast.show { transform: translateY(0); opacity: 1; }
+    /* ── Success Modal ── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; backdrop-filter: blur(4px); }
+    .modal-overlay.show { opacity: 1; pointer-events: all; }
+    .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 48px 40px; text-align: center; max-width: 400px; width: 90%; transform: scale(0.85) translateY(20px); transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease; opacity: 0; }
+    .modal-overlay.show .modal-box { transform: scale(1) translateY(0); opacity: 1; }
+    .modal-icon { width: 72px; height: 72px; border-radius: 50%; background: rgba(63,185,80,0.15); border: 2px solid var(--green); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 2rem; color: var(--green); animation: scaleIn 0.4s ease 0.2s both; }
+    .modal-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .modal-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+    .modal-close { background: var(--gradient); color: #fff; border: none; padding: 12px 32px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: var(--transition); }
+    .modal-close:hover { opacity: 0.85; transform: translateY(-2px); }
+    /* submit loading state */
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; }
 
     /* ── Footer ── */
     footer { background: var(--bg); border-top: 1px solid var(--border); padding: 40px 0; text-align: center; }
@@ -820,8 +831,15 @@
     </div>
   </footer>
 
-  <!-- Toast -->
-  <div id="toast">Message sent successfully!</div>
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="success-modal" onclick="closeModal(event)">
+    <div class="modal-box">
+      <div class="modal-icon">&#10003;</div>
+      <div class="modal-title">Message Sent!</div>
+      <div class="modal-desc">Thanks for reaching out. I'll get back to you as soon as possible.</div>
+      <button class="modal-close" onclick="closeModal()">Done</button>
+    </div>
+  </div>
 
   <script>
     // Typewriter
@@ -894,24 +912,34 @@
     // Contact form
     function sendMail(e) {
       e.preventDefault();
-      const name = document.getElementById('contact-name').value;
-      const email = document.getElementById('contact-email').value;
-      const subject = document.getElementById('contact-subject').value || 'Portfolio Contact';
-      const message = document.getElementById('contact-message').value;
-      emailjs.send('service_9p9xi8t', 'template_xrk1hkh', {
-        from_name: name, from_email: email, subject: subject, message: message
-      }).then(() => {
-        showToast('Message sent successfully!');
-        e.target.reset();
-      }).catch(() => {
-        showToast('Oops! Something went wrong. Please try again.');
-      });
+      const btn = e.target.querySelector('.submit-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Sending...';
+
+      const params = {
+        name: document.getElementById('contact-name').value,
+        email: document.getElementById('contact-email').value,
+        message: document.getElementById('contact-message').value,
+      };
+
+      emailjs.send('service_1fqav2m', 'template_ji6pfoj', params)
+        .then(() => {
+          e.target.reset();
+          document.getElementById('success-modal').classList.add('show');
+        })
+        .catch(() => {
+          alert('Something went wrong. Please email me directly at sadiqrauf00928@gmail.com');
+        })
+        .finally(() => {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="ti-email"></i> Send Message';
+        });
     }
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3500);
+
+    function closeModal(e) {
+      if (!e || e.target === document.getElementById('success-modal') || e.currentTarget === e.target) {
+        document.getElementById('success-modal').classList.remove('show');
+      }
     }
 
     // Active nav link highlight on scroll
