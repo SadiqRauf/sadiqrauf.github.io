@@ -88,13 +88,13 @@
       padding: 20px 0;
       transition: var(--transition);
     }
-    nav.scrolled {
-      background: rgba(13, 17, 23, 0.92);
+    nav.scrolled, nav.menu-open {
+      background: rgba(13, 17, 23, 0.97);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 14px 0;
     }
+    nav.scrolled { padding: 14px 0; }
     nav .nav-inner { display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
     .nav-logo span { color: var(--primary); }
@@ -867,11 +867,13 @@
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('open');
       mobileMenu.classList.toggle('open');
+      navbar.classList.toggle('menu-open');
     });
     document.querySelectorAll('.mobile-link').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
         mobileMenu.classList.remove('open');
+        navbar.classList.remove('menu-open');
       });
     });
 
