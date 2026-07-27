@@ -220,10 +220,40 @@
     /* ── Projects ── */
     #projects { background: var(--bg); }
     .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .projects-grid.grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    /* Group headers: Mobile Apps / Web */
+    .project-group { margin-top: 72px; }
+    .project-group-head { display: flex; align-items: center; gap: 16px; }
+    .project-group-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--primary); background: rgba(88,166,255,0.09); border: 1px solid rgba(88,166,255,0.18); flex-shrink: 0; }
+    .project-group-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text); white-space: nowrap; }
+    .project-group-count { font-size: 0.75rem; font-weight: 600; color: var(--muted); padding: 3px 10px; border-radius: 100px; background: var(--card); border: 1px solid var(--border); white-space: nowrap; }
+    .project-group-rule { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+    .project-group .projects-grid { margin-top: 28px; }
+
+    /* Collapsed extra projects + "show more" toggle */
+    /* Beats .project-card.horizontal's display:grid, which is declared later */
+    .projects-grid .project-card.collapsed { display: none; }
+    .show-more-wrap { display: flex; justify-content: center; margin-top: 28px; }
+    .show-more-btn {
+      display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+      padding: 11px 24px; border-radius: 100px;
+      background: var(--card); border: 1px solid var(--border); color: var(--subtle);
+      font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600;
+      transition: var(--transition);
+    }
+    .show-more-btn:hover { border-color: rgba(88,166,255,0.45); color: var(--primary); background: rgba(88,166,255,0.06); transform: translateY(-2px); }
+    .show-more-btn i { font-size: 0.65rem; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .show-more-btn.open i { transform: rotate(180deg); }
     .project-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
     .project-card:hover { border-color: rgba(88,166,255,0.4); transform: translateY(-6px); box-shadow: var(--shadow); }
     .project-header { padding: 24px 24px 0; display: flex; justify-content: space-between; align-items: flex-start; }
     .project-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: #fff; flex-shrink: 0; }
+    .project-icon.has-img { overflow: hidden; border: 1px solid var(--border); }
+    .project-icon.has-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    /* Wide brand wordmarks: too flat to read inside the square tile, so drop the tile */
+    .project-icon.wordmark { width: auto; height: 27px; background: none; border: none; border-radius: 0; overflow: visible; }
+    .project-icon.wordmark img { width: auto; height: 100%; object-fit: contain; display: block; }
     .project-links { display: flex; gap: 12px; }
     .project-links a { color: var(--muted); font-size: 0.95rem; transition: var(--transition); text-decoration: none; }
     .project-links a:hover { color: var(--primary); }
@@ -232,6 +262,105 @@
     .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
     .project-footer { padding: 16px 24px 24px; display: flex; flex-wrap: wrap; gap: 6px; }
     .tech-tag { padding: 3px 10px; background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.15); border-radius: 100px; font-size: 0.72rem; color: var(--primary); font-weight: 500; }
+
+    /* ── Project media carousel ── */
+    .project-media { position: relative; aspect-ratio: 4 / 5; max-height: 440px; overflow: hidden; background: #0f1724; border-bottom: 1px solid var(--border); }
+    .project-media.landscape { aspect-ratio: 16 / 10; max-height: none; }
+    .project-media.landscape .pm-cover { gap: 12px; }
+
+    /* Compact horizontal card: portrait screenshot column beside the content */
+    .project-card.horizontal { display: grid; grid-template-columns: 170px 1fr; grid-template-rows: auto 1fr auto; }
+    .project-card.horizontal .project-media { grid-area: 1 / 1 / 4 / 2; aspect-ratio: auto; max-height: none; height: 100%; border-bottom: none; border-right: 1px solid var(--border); }
+    .project-card.horizontal .project-header { grid-column: 2; padding: 20px 20px 0; }
+    .project-card.horizontal .project-body { grid-column: 2; padding: 14px 20px; }
+    .project-card.horizontal .project-footer { grid-column: 2; padding: 0 20px 20px; }
+    .project-card.horizontal .pm-arrow { width: 26px; height: 26px; font-size: 0.6rem; }
+    .project-card.horizontal .pm-arrow.prev { left: 6px; }
+    .project-card.horizontal .pm-arrow.next { right: 6px; }
+    .project-card.horizontal .pm-badge { top: 8px; left: 8px; padding: 3px 7px; font-size: 0.55rem; letter-spacing: 0.06em; }
+    .project-card.horizontal .pm-dots { bottom: 10px; gap: 5px; }
+    .project-card.horizontal .pm-dot { width: 5px; height: 5px; }
+    .project-card.horizontal .pm-dot.active { width: 16px; }
+    .project-card.horizontal .pm-cover { padding: 16px; gap: 10px; }
+    .project-card.horizontal .pm-cover-title, .project-card.horizontal .pm-cover-chips { display: none; }
+    .project-card.horizontal .pm-cover-glyph { width: 58px; height: 58px; border-radius: 17px; font-size: 1.55rem; }
+    .project-media::after {
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: linear-gradient(to top, rgba(3,7,14,0.55) 0%, rgba(3,7,14,0.08) 30%, transparent 55%);
+    }
+    .pm-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+    .pm-slide { flex: 0 0 100%; height: 100%; position: relative; }
+    .pm-slide img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+    .pm-slide.zoomable { cursor: zoom-in; }
+
+    .pm-arrow {
+      position: absolute; top: 50%; z-index: 3; transform: translateY(-50%);
+      width: 32px; height: 32px; padding: 0; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; color: #fff;
+      background: rgba(9,13,20,0.55); border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      opacity: 0; transition: var(--transition);
+    }
+    .pm-arrow.prev { left: 10px; }
+    .pm-arrow.next { right: 10px; }
+    .project-card:hover .pm-arrow, .pm-arrow:focus-visible { opacity: 1; }
+    .pm-arrow:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-50%) scale(1.08); }
+
+    .pm-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; gap: 6px; }
+    .pm-dot { width: 6px; height: 6px; padding: 0; border: none; border-radius: 100px; background: rgba(255,255,255,0.35); cursor: pointer; transition: var(--transition); }
+    .pm-dot:hover { background: rgba(255,255,255,0.65); }
+    .pm-dot.active { width: 20px; background: #fff; }
+
+    .pm-badge {
+      position: absolute; top: 12px; left: 12px; z-index: 3;
+      padding: 4px 10px; border-radius: 100px;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+      color: #fff; background: rgba(9,13,20,0.6); border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Cover panel used by projects without app screenshots */
+    .pm-cover { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 28px; text-align: center; }
+    .pm-cover::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 25%, transparent 72%);
+      mask-image: radial-gradient(ellipse at 50% 45%, #000 25%, transparent 72%);
+    }
+    .pm-cover-glyph {
+      position: relative; width: 78px; height: 78px; border-radius: 22px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: #fff; box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+      transition: var(--transition);
+    }
+    .project-card:hover .pm-cover-glyph { transform: translateY(-4px) scale(1.04); }
+    .pm-cover-title { position: relative; font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; }
+    .pm-cover-sub { position: relative; font-size: 0.64rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+    .pm-cover-chips { position: relative; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 4px; }
+    .pm-cover-chips span { padding: 3px 9px; border-radius: 100px; font-size: 0.65rem; font-weight: 500; color: rgba(255,255,255,0.72); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); }
+
+    /* Screenshot lightbox */
+    .pm-lightbox { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 40px 20px; background: rgba(3,7,14,0.9); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .pm-lightbox.show { opacity: 1; pointer-events: all; }
+    .pm-lightbox img { max-width: min(1100px, 92vw); max-height: min(880px, 100%); border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 24px 80px rgba(0,0,0,0.6); transform: scale(0.92); transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+    .pm-lightbox.show img { transform: scale(1); }
+    .pm-lightbox-close { position: absolute; top: 24px; right: 24px; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16); color: #fff; font-size: 0.9rem; cursor: pointer; transition: var(--transition); }
+    .pm-lightbox-close:hover { background: var(--primary); border-color: var(--primary); }
+
+    @media (max-width: 440px) {
+      .project-card.horizontal { grid-template-columns: 122px 1fr; }
+      .project-card.horizontal .project-header { padding: 16px 16px 0; }
+      .project-card.horizontal .project-body { padding: 12px 16px; }
+      .project-card.horizontal .project-footer { padding: 0 16px 16px; }
+      .project-card.horizontal .pm-arrow { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pm-track { transition: none; }
+    }
 
     /* ── Contact ── */
     #contact { background: var(--surface); }
@@ -281,13 +410,17 @@
       .about-grid, .exp-layout, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
       .skills-grid { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-card.horizontal { grid-template-columns: 140px 1fr; }
       .about-badge { right: 0; }
     }
     @media (max-width: 640px) {
       .section { padding: 70px 0; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .projects-grid { grid-template-columns: 1fr; }
+      .projects-grid, .projects-grid.grid-2 { grid-template-columns: 1fr; }
+      .project-group { margin-top: 56px; }
+      .project-group-title { font-size: 1.15rem; }
+      .project-card.horizontal { grid-template-columns: 150px 1fr; }
       .hero-stats { gap: 20px; }
       .hero-btns .btn { padding: 10px 20px; font-size: 0.85rem; }
       .form-row-2 { grid-template-columns: 1fr; }
@@ -627,131 +760,281 @@
         <h2 class="section-title">Recent Projects</h2>
         <p class="section-desc" style="margin:16px auto 0;">Production-ready applications shipped to real users across mobile and web platforms.</p>
       </div>
-      <div class="projects-grid">
-
-        <div class="project-card reveal" style="transition-delay:0.1s">
-          <div class="project-header">
-            <div class="project-icon">&#x2699;</div>
-            <div class="project-links">
-              <a href="https://app.rareos.com/" target="_blank" title="Commerce Platform"><i class="ti-link"></i></a>
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-name">rareOS Platform</div>
-            <div class="project-desc">Modern commerce management platform for merchants with inventory management, point-of-sale operations, marketplace distribution, and business analytics.</div>
-          </div>
-          <div class="project-footer">
-            <span class="tech-tag">ReactJS</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Material UI</span>
-            <span class="tech-tag">RTK Query</span>
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">Keycloak</span>
-          </div>
+      <!-- Mobile Apps -->
+      <div class="project-group">
+        <div class="project-group-head reveal">
+          <div class="project-group-icon"><i class="ti-mobile"></i></div>
+          <div class="project-group-title">Mobile Apps</div>
+          <span class="project-group-count">5 shipped</span>
+          <div class="project-group-rule"></div>
         </div>
+        <div class="projects-grid grid-2" data-collapse="2" data-more-noun="apps">
 
-        <div class="project-card reveal" style="transition-delay:0.15s">
-          <div class="project-header">
-            <div class="project-icon" style="background:linear-gradient(135deg,#3fb950,#06b6d4);">&#x1F4F7;</div>
+          <div class="project-card horizontal reveal" style="transition-delay:0.1s">
+            <div class="project-media" data-carousel style="background:radial-gradient(circle at 50% 38%, #102844 0%, #060d16 100%);">
+              <span class="pm-badge">New &middot; 2026</span>
+              <div class="pm-track">
+                <div class="pm-slide zoomable"><img src="assets/baytonia/B1.webp" alt="Baytonia BigBox splash screen" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/baytonia/B2.webp" alt="Baytonia BigBox login screen" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/baytonia/B3.webp" alt="Baytonia BigBox registration form with role and city selection" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/baytonia/B4.webp" alt="Baytonia BigBox orders dashboard with delivery, return and service tabs" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/baytonia/B6.webp" alt="Baytonia BigBox settings screen with language, notifications and dark mode" loading="lazy" decoding="async"></div>
+              </div>
+              <button class="pm-arrow prev" type="button" aria-label="Previous screenshot"><i class="ti-angle-left"></i></button>
+              <button class="pm-arrow next" type="button" aria-label="Next screenshot"><i class="ti-angle-right"></i></button>
+              <div class="pm-dots"></div>
+            </div>
+            <div class="project-header">
+              <div class="project-icon has-img" style="background:#000;"><img src="assets/baytonia/icon.webp" alt="Baytonia BigBox app icon" loading="lazy" decoding="async"></div>
               <div class="project-links">
-              <a href="https://play.google.com/store/apps/details?id=com.rareos.scanner" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
-              <a href="https://apps.apple.com/us/app/rareos-app/id6759407825" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+                <a href="https://play.google.com/store/apps/details?id=com.baytonia.bigbox" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-name">Baytonia BigBox</div>
+              <div class="project-desc">Field-operations app for Baytonia's fulfilment fleet. Drivers and technicians register by role and city, then work assigned delivery, return, and service orders through to completion &mdash; with a fully bilingual English/Arabic interface, dark mode, and push notifications.</div>
+            </div>
+            <div class="project-footer">
+              <span class="tech-tag">React Native</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">i18n (EN / AR)</span>
+              <span class="tech-tag">Push Notifications</span>
+              <span class="tech-tag">Play Store</span>
             </div>
           </div>
-          <div class="project-body">
-            <div class="project-name">rareOS Scanner App</div>
-            <div class="project-desc">Cross-platform enterprise mobile app with a streamlined 3-step workflow (Snap, Track, Sell) that optimizes inventory processing speed dramatically.</div>
-          </div>
-          <div class="project-footer">
-            <span class="tech-tag">React Native</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Keycloak</span>
-            <span class="tech-tag">Supabase</span>
-          </div>
-        </div>
 
-        <div class="project-card reveal" style="transition-delay:0.2s">
-          <div class="project-header">
-            <div class="project-icon" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);">&#x1F9E0;</div>
-            <div class="project-links">
-              <a href="https://play.google.com/store/apps/details?id=com.govbuddy.engage" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
-              <a href="https://apps.apple.com/us/app/govbuddy-engage/id6751733815" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+          <div class="project-card horizontal reveal" style="transition-delay:0.15s">
+            <div class="project-media" data-carousel style="background:#f6f1ef;">
+              <div class="pm-track">
+                <div class="pm-slide zoomable"><img src="assets/rareOS-Scanner/Rar1.webp" alt="rareOS Scanner welcome screen — Snap. Track. Sell." loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/rareOS-Scanner/Rar2.webp" alt="rareOS Scanner inventory intake home screen" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/rareOS-Scanner/Rar3.webp" alt="rareOS Scanner AI photo review and analysis flow" loading="lazy" decoding="async"></div>
+              </div>
+              <button class="pm-arrow prev" type="button" aria-label="Previous screenshot"><i class="ti-angle-left"></i></button>
+              <button class="pm-arrow next" type="button" aria-label="Next screenshot"><i class="ti-angle-right"></i></button>
+              <div class="pm-dots"></div>
+            </div>
+            <div class="project-header">
+              <div class="project-icon has-img" style="background:#eef1f8;"><img src="assets/rareOS-Scanner/icon.webp" alt="rareOS app icon" loading="lazy" decoding="async"></div>
+              <div class="project-links">
+                <a href="https://play.google.com/store/apps/details?id=com.rareos.scanner" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
+                <a href="https://apps.apple.com/us/app/rareos-app/id6759407825" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-name">rareOS Scanner App</div>
+              <div class="project-desc">Cross-platform enterprise mobile app with a streamlined 3-step workflow (Snap, Track, Sell). AI-assisted intake scans games, cards, and collectibles from photos, optimizing inventory processing speed dramatically.</div>
+            </div>
+            <div class="project-footer">
+              <span class="tech-tag">React Native</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">AI Scanning</span>
+              <span class="tech-tag">Keycloak</span>
+              <span class="tech-tag">Supabase</span>
             </div>
           </div>
-          <div class="project-body">
-            <div class="project-name">Engage App</div>
-            <div class="project-desc">AI-powered legislative research platform enabling organizations to monitor policy activities, conduct research, and run real-time conversational policy queries.</div>
-          </div>
-          <div class="project-footer">
-            <span class="tech-tag">React Native</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">AI Integration</span>
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">Keycloak</span>
-          </div>
-        </div>
 
-        <div class="project-card reveal" style="transition-delay:0.25s">
-          <div class="project-header">
-            <div class="project-icon" style="background:linear-gradient(135deg,#06b6d4,#58a6ff);">&#x1F3DB;</div>
-            <div class="project-links">
-              <a href="https://play.google.com/store/apps/details?id=com.govbuddy.connect&hl=en" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
-              <a href="https://apps.apple.com/au/app/govbuddy-connect/id472959645" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+          <div class="project-card horizontal reveal" style="transition-delay:0.2s">
+            <div class="project-media" data-carousel style="background:linear-gradient(180deg,#f8e7e6 0%,#dd211d 48%,#8d0c09 100%);">
+              <div class="pm-track">
+                <div class="pm-slide zoomable"><img src="assets/engage/1.webp" alt="GovBuddy Engage home screen with AI assistant and bill tracking calendar" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/engage/4.webp" alt="GovBuddy Engage advanced bill search with session and state filters" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/engage/7.webp" alt="GovBuddy Engage bill details with status timeline and passing-chance gauge" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/engage/6.webp" alt="GovBuddy Engage tracked bills list with alert dates and authors" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/engage/5.webp" alt="GovBuddy Engage bill groups dashboard with group and bill counts" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/engage/3.webp" alt="GovBuddy Engage notifications feed of new legislative calendar events" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/engage/2.webp" alt="GovBuddy Engage AI voice assistant screen" loading="lazy" decoding="async"></div>
+              </div>
+              <button class="pm-arrow prev" type="button" aria-label="Previous screenshot"><i class="ti-angle-left"></i></button>
+              <button class="pm-arrow next" type="button" aria-label="Next screenshot"><i class="ti-angle-right"></i></button>
+              <div class="pm-dots"></div>
+            </div>
+            <div class="project-header">
+              <div class="project-icon has-img" style="background:#c8102e;"><img src="assets/engage/icon.webp" alt="GovBuddy Engage app icon" loading="lazy" decoding="async"></div>
+              <div class="project-links">
+                <a href="https://play.google.com/store/apps/details?id=com.govbuddy.engage" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
+                <a href="https://apps.apple.com/us/app/govbuddy-engage/id6751733815" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-name">Engage App</div>
+              <div class="project-desc">AI-powered legislative research platform. Organizations track bills across states, organize them into groups with custom alerts, follow hearing calendars and notifications, and query policy activity in real time through AI chat and voice &mdash; with predicted passing chance on every bill.</div>
+            </div>
+            <div class="project-footer">
+              <span class="tech-tag">React Native</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">AI Integration</span>
+              <span class="tech-tag">Voice AI</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Keycloak</span>
             </div>
           </div>
-          <div class="project-body">
-            <div class="project-name">Connect App</div>
-            <div class="project-desc">Mobile app enabling users to discover and connect with elected officials, legislative staff, committees, and government offices across multiple U.S. states.</div>
-          </div>
-          <div class="project-footer">
-            <span class="tech-tag">React Native</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Keycloak</span>
-            <span class="tech-tag">REST APIs</span>
-            <span class="tech-tag">iOS &amp; Android</span>
-          </div>
-        </div>
 
-        <div class="project-card reveal" style="transition-delay:0.3s">
-          <div class="project-header">
-            <div class="project-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">&#x1F6D2;</div>
-            <div class="project-links">
-              <a href="https://play.google.com/store/apps/details?id=com.wise.wisemarket" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
-              <a href="https://apps.apple.com/pk/app/wisemarket/id6474654022" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+          <div class="project-card horizontal reveal" style="transition-delay:0.25s">
+            <div class="project-media">
+              <div class="pm-cover" style="background:linear-gradient(150deg,#0a2a3d 0%,#0d1117 55%,#122a4d 100%);">
+                <div class="pm-cover-glyph" style="background:linear-gradient(135deg,#06b6d4,#58a6ff);">&#x1F3DB;</div>
+                <div>
+                  <div class="pm-cover-title">Connect</div>
+                  <div class="pm-cover-sub">iOS &middot; Android</div>
+                </div>
+                <div class="pm-cover-chips"><span>Officials</span><span>Committees</span><span>Offices</span></div>
+              </div>
+            </div>
+            <div class="project-header">
+              <div class="project-icon" style="background:linear-gradient(135deg,#06b6d4,#58a6ff);">&#x1F3DB;</div>
+              <div class="project-links">
+                <a href="https://play.google.com/store/apps/details?id=com.govbuddy.connect&hl=en" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
+                <a href="https://apps.apple.com/au/app/govbuddy-connect/id472959645" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-name">Connect App</div>
+              <div class="project-desc">Mobile app enabling users to discover and connect with elected officials, legislative staff, committees, and government offices across multiple U.S. states.</div>
+            </div>
+            <div class="project-footer">
+              <span class="tech-tag">React Native</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Keycloak</span>
+              <span class="tech-tag">REST APIs</span>
+              <span class="tech-tag">iOS &amp; Android</span>
             </div>
           </div>
-          <div class="project-body">
-            <div class="project-name">Wisemarket App</div>
-            <div class="project-desc">Full-featured online marketplace app for tech products and accessories with secure payment gateways, Redux state management, and a polished UX on both platforms.</div>
-          </div>
-          <div class="project-footer">
-            <span class="tech-tag">React Native</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Redux</span>
-            <span class="tech-tag">Stripe</span>
-            <span class="tech-tag">Play Store</span>
-            <span class="tech-tag">App Store</span>
-          </div>
-        </div>
 
-        <div class="project-card reveal" style="transition-delay:0.35s">
-          <div class="project-header">
-            <div class="project-icon" style="background:linear-gradient(135deg,#10b981,#059669);">&#x1F310;</div>
-            <div class="project-links">
-              <a href="https://www.rareos.com/" target="_blank" title="Website"><i class="ti-link"></i></a>
+          <div class="project-card horizontal reveal" style="transition-delay:0.3s">
+            <div class="project-media">
+              <div class="pm-cover" style="background:linear-gradient(150deg,#3d2410 0%,#0d1117 55%,#3d1418 100%);">
+                <div class="pm-cover-glyph" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">&#x1F6D2;</div>
+                <div>
+                  <div class="pm-cover-title">Wisemarket</div>
+                  <div class="pm-cover-sub">iOS &middot; Android</div>
+                </div>
+                <div class="pm-cover-chips"><span>Marketplace</span><span>Payments</span></div>
+              </div>
+            </div>
+            <div class="project-header">
+              <div class="project-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">&#x1F6D2;</div>
+              <div class="project-links">
+                <a href="https://play.google.com/store/apps/details?id=com.wise.wisemarket" target="_blank" rel="noopener" title="Android"><i class="ti-android"></i></a>
+                <a href="https://apps.apple.com/pk/app/wisemarket/id6474654022" target="_blank" rel="noopener" title="iOS"><i class="ti-apple"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-name">Wisemarket App</div>
+              <div class="project-desc">Full-featured online marketplace app for tech products and accessories with secure payment gateways, Redux state management, and a polished UX on both platforms.</div>
+            </div>
+            <div class="project-footer">
+              <span class="tech-tag">React Native</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Redux</span>
+              <span class="tech-tag">Stripe</span>
+              <span class="tech-tag">Play Store</span>
+              <span class="tech-tag">App Store</span>
             </div>
           </div>
-          <div class="project-body">
-            <div class="project-name">rareOS Website</div>
-            <div class="project-desc">Modern, responsive marketing website for the rareOS commerce platform built with React.js, TypeScript, and Tailwind CSS delivering fast, scalable user experiences.</div>
-          </div>
-          <div class="project-footer">
-            <span class="tech-tag">ReactJS</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Tailwind CSS</span>
-          </div>
-        </div>
 
+        </div>
+      </div>
+
+      <!-- Web -->
+      <div class="project-group">
+        <div class="project-group-head reveal">
+          <div class="project-group-icon"><i class="ti-desktop"></i></div>
+          <div class="project-group-title">Web Platforms &amp; Websites</div>
+          <span class="project-group-count">3 shipped</span>
+          <div class="project-group-rule"></div>
+        </div>
+        <div class="projects-grid grid-2" data-collapse="2" data-more-noun="sites">
+
+          <div class="project-card reveal" style="transition-delay:0.1s">
+            <div class="project-media landscape" data-carousel style="background:#eef1f6;">
+              <div class="pm-track">
+                <div class="pm-slide zoomable"><img src="assets/rareOS-platform/rareOS.webp" alt="rareOS Platform new order screen with point-of-sale, trade-in and customer wallet panels" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/rareOS-platform/rareOS2.webp" alt="rareOS Platform analytics overview with gross sales, order volume and sales-by-channel breakdown" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/rareOS-platform/rareOS3.webp" alt="rareOS Platform acquisitions analytics with total spend and acquisition volume over time" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable"><img src="assets/rareOS-platform/rareOS4.webp" alt="rareOS Platform trade credit analytics with outstanding liability and credit versus cash payout split" loading="lazy" decoding="async"></div>
+              </div>
+              <button class="pm-arrow prev" type="button" aria-label="Previous screenshot"><i class="ti-angle-left"></i></button>
+              <button class="pm-arrow next" type="button" aria-label="Next screenshot"><i class="ti-angle-right"></i></button>
+              <div class="pm-dots"></div>
+            </div>
+            <div class="project-header">
+              <div class="project-icon has-img" style="background:#eef1f8;"><img src="assets/rareOS-Scanner/icon.webp" alt="rareOS app icon" loading="lazy" decoding="async"></div>
+              <div class="project-links">
+                <a href="https://app.rareos.com/" target="_blank" title="Commerce Platform"><i class="ti-link"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-name">rareOS Platform</div>
+              <div class="project-desc">Modern commerce management platform for merchants covering inventory, point-of-sale, trade-ins and store credit, and marketplace distribution &mdash; plus a multi-tab analytics suite reporting on sales, acquisitions, trade credit, customers, operations, and financials.</div>
+            </div>
+            <div class="project-footer">
+              <span class="tech-tag">ReactJS</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Material UI</span>
+              <span class="tech-tag">RTK Query</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Keycloak</span>
+            </div>
+          </div>
+
+          <div class="project-card reveal" style="transition-delay:0.15s">
+            <div class="project-media landscape" data-carousel>
+              <div class="pm-track">
+                <div class="pm-slide zoomable" style="background:#0a0d14;"><img src="assets/rareOS-website/img1.webp" alt="rareOS marketing site hero — Take inventory from hours to minutes" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable" style="background:#f4f5f7;"><img src="assets/rareOS-website/img2.webp" alt="rareOS marketing site how-it-works section with three product mockups" loading="lazy" decoding="async"></div>
+              </div>
+              <button class="pm-arrow prev" type="button" aria-label="Previous screenshot"><i class="ti-angle-left"></i></button>
+              <button class="pm-arrow next" type="button" aria-label="Next screenshot"><i class="ti-angle-right"></i></button>
+              <div class="pm-dots"></div>
+            </div>
+            <div class="project-header">
+              <div class="project-icon has-img" style="background:#eef1f8;"><img src="assets/rareOS-Scanner/icon.webp" alt="rareOS app icon" loading="lazy" decoding="async"></div>
+              <div class="project-links">
+                <a href="https://www.rareos.com/" target="_blank" title="Website"><i class="ti-link"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-name">rareOS Website</div>
+              <div class="project-desc">Modern, responsive marketing website for the rareOS commerce platform built with React.js, TypeScript, and Tailwind CSS delivering fast, scalable user experiences.</div>
+            </div>
+            <div class="project-footer">
+              <span class="tech-tag">ReactJS</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Tailwind CSS</span>
+            </div>
+          </div>
+
+          <div class="project-card reveal" style="transition-delay:0.2s">
+            <div class="project-media landscape" data-carousel>
+              <span class="pm-badge">Launching soon</span>
+              <div class="pm-track">
+                <div class="pm-slide zoomable" style="background:#fbfbfd;"><img src="assets/raredepot/1.webp" alt="rareDepot hero — one place for collectibles, with waitlist signup and rotating category strip" loading="lazy" decoding="async"></div>
+                <div class="pm-slide zoomable" style="background:#0a0f1a;"><img src="assets/raredepot/2.webp" alt="rareDepot trust and safety section explaining seller verification and public ratings" loading="lazy" decoding="async"></div>
+              </div>
+              <button class="pm-arrow prev" type="button" aria-label="Previous screenshot"><i class="ti-angle-left"></i></button>
+              <button class="pm-arrow next" type="button" aria-label="Next screenshot"><i class="ti-angle-right"></i></button>
+              <div class="pm-dots"></div>
+            </div>
+            <div class="project-header">
+              <div class="project-icon has-img wordmark"><img src="assets/raredepot/icon.webp" alt="rareDepot logo" loading="lazy" decoding="async"></div>
+              <div class="project-links">
+                <a href="https://raredepot.com/" target="_blank" rel="noopener" title="Website"><i class="ti-link"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-name">rareDepot</div>
+              <div class="project-desc">Pre-launch site for a verified collectibles marketplace spanning coins, graded slabs, sports cards, TCG, retro cartridges and more. Animated category rotator, waitlist capture, and a trust-and-safety story built around seller verification and public ratings.</div>
+            </div>
+            <div class="project-footer">
+              <span class="tech-tag">ReactJS</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Tailwind CSS</span>
+              <span class="tech-tag">Responsive</span>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
@@ -845,6 +1128,12 @@
     </div>
   </div>
 
+  <!-- ── Screenshot lightbox ── -->
+  <div class="pm-lightbox" id="pm-lightbox">
+    <button class="pm-lightbox-close" type="button" aria-label="Close screenshot"><i class="ti-close"></i></button>
+    <img src="" alt="">
+  </div>
+
   <script>
     // Typewriter
     const roles = [
@@ -913,31 +1202,187 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => observer.observe(el));
 
-    // Contact form
-    function sendMail(e) {
+    // Project screenshot carousels
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lightbox = document.getElementById('pm-lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    function openLightbox(img) {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.closest('.pm-lightbox-close')) closeLightbox();
+    });
+
+    document.querySelectorAll('[data-carousel]').forEach(carousel => {
+      const track = carousel.querySelector('.pm-track');
+      const slides = Array.from(track.children);
+      const dotsWrap = carousel.querySelector('.pm-dots');
+
+      slides.forEach(slide => {
+        if (!slide.classList.contains('zoomable')) return;
+        slide.addEventListener('click', () => openLightbox(slide.querySelector('img')));
+      });
+
+      if (slides.length < 2) {
+        carousel.querySelectorAll('.pm-arrow').forEach(a => a.remove());
+        if (dotsWrap) dotsWrap.remove();
+        return;
+      }
+
+      let index = 0;
+      let timer = null;
+
+      const dots = slides.map((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'pm-dot';
+        dot.setAttribute('aria-label', 'Go to screenshot ' + (i + 1));
+        dot.addEventListener('click', () => { go(i); restart(); });
+        dotsWrap.appendChild(dot);
+        return dot;
+      });
+
+      function go(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = 'translateX(-' + index * 100 + '%)';
+        dots.forEach((d, n) => d.classList.toggle('active', n === index));
+      }
+
+      function stop() { clearInterval(timer); timer = null; }
+      function start() { if (!timer && !reducedMotion) timer = setInterval(() => go(index + 1), 3800); }
+      function restart() { stop(); start(); }
+
+      carousel.querySelector('.pm-arrow.prev').addEventListener('click', () => { go(index - 1); restart(); });
+      carousel.querySelector('.pm-arrow.next').addEventListener('click', () => { go(index + 1); restart(); });
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+
+      // Swipe support
+      let startX = null;
+      carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; stop(); }, { passive: true });
+      carousel.addEventListener('touchend', e => {
+        if (startX === null) return;
+        const delta = e.changedTouches[0].clientX - startX;
+        if (Math.abs(delta) > 40) go(delta < 0 ? index + 1 : index - 1);
+        startX = null;
+        start();
+      });
+
+      // Only autoplay while the card is on screen
+      new IntersectionObserver(entries => {
+        entries.forEach(entry => entry.isIntersecting ? start() : stop());
+      }, { threshold: 0.35 }).observe(carousel);
+
+      go(0);
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      closeLightbox();
+      closeModal();
+    });
+
+    // Collapse each project grid to the first N cards, behind a "show more" toggle
+    document.querySelectorAll('[data-collapse]').forEach(grid => {
+      const keep = parseInt(grid.dataset.collapse, 10);
+      const noun = grid.dataset.moreNoun || 'projects';
+      const extra = Array.from(grid.children).slice(keep);
+      if (!extra.length) return;
+
+      const collapse = () => {
+        extra.forEach(card => card.classList.add('collapsed'));
+        btn.classList.remove('open');
+        btn.innerHTML = 'Show ' + extra.length + ' more ' + noun + ' <i class="ti-angle-down"></i>';
+        btn.setAttribute('aria-expanded', 'false');
+      };
+
+      const expand = () => {
+        extra.forEach((card, i) => {
+          card.classList.remove('collapsed');
+          // These never intersected while hidden, so reveal them explicitly
+          card.style.transitionDelay = (i * 0.06).toFixed(2) + 's';
+          requestAnimationFrame(() => card.classList.add('visible'));
+        });
+        btn.classList.add('open');
+        btn.innerHTML = 'Show less <i class="ti-angle-down"></i>';
+        btn.setAttribute('aria-expanded', 'true');
+      };
+
+      const wrap = document.createElement('div');
+      wrap.className = 'show-more-wrap';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'show-more-btn';
+      wrap.appendChild(btn);
+      grid.insertAdjacentElement('afterend', wrap);
+
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('open')) {
+          collapse();
+          grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          expand();
+        }
+      });
+
+      collapse();
+    });
+
+    // Contact form → Google Form
+    const GOOGLE_FORM_ID = '1FAIpQLSfYaCgAbYo6hd_T4r8rOg_AYEAoz5_frTtbcXScFWjU_d9EJQ';
+    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/' + GOOGLE_FORM_ID + '/formResponse';
+    const GOOGLE_FORM_VIEW = 'https://docs.google.com/forms/d/e/' + GOOGLE_FORM_ID + '/viewform';
+    const GOOGLE_FORM_FIELDS = {
+      name: 'entry.246215569',
+      email: 'entry.211321061',
+      subject: 'entry.1865283452',
+      message: 'entry.1898660619',
+    };
+
+    async function sendMail(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.submit-btn');
+      const form = e.target;
+      const btn = form.querySelector('.submit-btn');
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span> Sending...';
 
-      const params = {
-        name: document.getElementById('contact-name').value,
-        email: document.getElementById('contact-email').value,
-        message: document.getElementById('contact-message').value,
+      const values = {
+        name: document.getElementById('contact-name').value.trim(),
+        email: document.getElementById('contact-email').value.trim(),
+        subject: document.getElementById('contact-subject').value.trim(),
+        message: document.getElementById('contact-message').value.trim(),
       };
 
-      emailjs.send('service_1fqav2m', 'template_ji6pfoj', params)
-        .then(() => {
-          e.target.reset();
-          document.getElementById('success-modal').classList.add('show');
-        })
-        .catch(() => {
-          alert('Something went wrong. Please email me directly at sadiqrauf00928@gmail.com');
-        })
-        .finally(() => {
-          btn.disabled = false;
-          btn.innerHTML = '<i class="ti-email"></i> Send Message';
-        });
+      const body = new FormData();
+      Object.entries(GOOGLE_FORM_FIELDS).forEach(([key, entry]) => body.append(entry, values[key]));
+
+      // Secondary notification — never blocks the submission or the popup
+      if (window.emailjs) {
+        emailjs.send('service_1fqav2m', 'template_ji6pfoj', values).catch(() => {});
+      }
+
+      try {
+        // Google Forms doesn't send CORS headers, so the response is opaque:
+        // a resolved promise means the request reached Google, not that it validated.
+        await fetch(GOOGLE_FORM_ACTION, { method: 'POST', mode: 'no-cors', body });
+        form.reset();
+        document.getElementById('success-modal').classList.add('show');
+      } catch (err) {
+        alert('Couldn\'t send your message — you may be offline.\n\nEmail me directly at sadiqrauf00928@gmail.com, or use the form at:\n' + GOOGLE_FORM_VIEW);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="ti-email"></i> Send Message';
+      }
     }
 
     function closeModal(e) {
